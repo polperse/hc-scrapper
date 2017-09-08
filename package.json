@@ -1,0 +1,19 @@
+{
+  "name": "hc-scrapper1",
+  "version": "1.0.0",
+  "description": "heroclix db scrapper",
+  "main": "ex1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polperse/hc-scrapper.git"
+  },
+  "author": "polperse",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/polperse/hc-scrapper/issues"
+  },
+  "homepage": "https://github.com/polperse/hc-scrapper#readme"
+}
