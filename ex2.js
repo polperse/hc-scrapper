@@ -2,6 +2,7 @@ var express = require('express');
 var request = require('request');
 var path = require('path');
 var cheerio = require('cheerio');
+var util = require('util')
 //var fs = require('fs');
 
 var app = express();
@@ -26,41 +27,43 @@ request(url, function(err, response, body){
   var figureTargets = $('.thead div img');
   var figureTargetsImgSrc = $(figureTargets).attr('src');
 
-  $('.thead img').each(function(i, taList) {
+  $('.thead img').each(function(i, element) {
 
-    console.log($(this).attr('src') + ' hola');
+    console.log('ImgSrc: ' + $(this).attr('src'));
+    console.log('Title: ' + $(this).attr('title'));
+    console.log('^^^^^^^^^^^^');
 
-    if (i > 0) {
+    if ( i > 0 ) {
 
-      var taListAux = [
+      var ta = [
         {
-            taImg : $(this).attr('src'),
-            taDesc : 'null',
-            taName : 'null'
+            taName : 'null',
+            taDesc : $(this).attr('title'),
+            taImg : $(this).attr('src')
           }];
 
-      taList.push("miau");
-      //taList[aux].taDesc = $(this).attr('title');
+      taList.push(ta);
+
     }
-    console.log($(this).attr('src'));
   });
 
   $('.thead span').each(function(i, element){
-    taList[i].taName = $(this).text();
-  });
+     console.log(i);
+     taList[i].taName = $(this).text();
+   });
+   
 
+  var objFigure = {
+    name : figureNameText,
+    cost : figureCostText,
+    range : figureRangeText,
+    targets : figureTargetsImgSrc,
+    ta : taList
+  };
 
-
-
-var objFigure = {
-  name : figureNameText,
-  cost : figureCostText,
-  range : figureRangeText,
-  targets : figureTargetsImgSrc,
-  ta : taList
-};
-
-  console.log(objFigure);
+  console.log(util.inspect(objFigure, false, null));
+  console.log('==========');
+  console.log(objFigure[1[1]]);
 
 });
 
