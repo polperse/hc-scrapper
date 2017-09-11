@@ -3,6 +3,7 @@ var request = require('request');
 var path = require('path');
 var cheerio = require('cheerio');
 var util = require('util');
+var math = require('math');
 //var fs = require('fs');
 
 var app = express();
@@ -73,54 +74,61 @@ request(url, function(err, response, body)
      iconList.push($(this).attr('src'));
   });
 
+  //console.log('html: ' + $('.power td').html());
+
   $('.power td').each(function(i, element){
 
     var clickSlot = i + 1;
 
     if (clickSlot === 1) {
-      var clickNumber = 1; console.log('seteo a ' + clickNumber);
+      var clickNumber = 1; console.log('seteo a clicknumber en: ' + clickNumber);
     }
 
-    console.log('paso ' + clickSlot + ' ' + (clickSlot / 5) + 1);
-    var click = [{power: $(this).attr('title')},{value: $(this).text()}];
-    switch ((clickSlot / 5) + 1){
-      case 1:
-        clickList1.push(click);
-        break;
-      case 2:
-        clickList2.push(click);
-        break;
-      case 3:
-        clickList3.push(click);
-        break;
-      case 4:
-        clickList4.push(click);
-        break;
-      case 5:
-        clickList5.push(click);
-        break;
-      case 6:
-        clickList6.push(click);
-        break;
-      case 7:
-        clickList7.push(click);
-        break;
-      case 8:
-        clickList8.push(click);
-        break;
-      case 9:
-        clickList9.push(click);
-        break;
-      case 10:
-        clickList10.push(click);
-        break;
-      case 11:
-        clickList11.push(click);
-        break;
-      case 12:
-        clickList12.push(click);
+    console.log('paso ' + clickSlot + ' ' + math.floor((clickSlot / 5) + 1));
+
+    if ((clickSlot % 5) !== 0 ) {
+      var click = [{power: $(this).attr('title')},{value: $(this).text().trim()}];
+      switch (math.floor((clickSlot / 5) + 1)){
+        case 1:
+          clickList1.push(click);
+          break;
+        case 2:
+          clickList2.push(click);
+          break;
+        case 3:
+          clickList3.push(click);
+          break;
+        case 4:
+          clickList4.push(click);
+          break;
+        case 5:
+          clickList5.push(click);
+          break;
+        case 6:
+          clickList6.push(click);
+          break;
+        case 7:
+          clickList7.push(click);
+          break;
+        case 8:
+          clickList8.push(click);
+          break;
+        case 9:
+          clickList9.push(click);
+          break;
+        case 10:
+          clickList10.push(click);
+          break;
+        case 11:
+          clickList11.push(click);
+          break;
+        case 12:
+          clickList12.push(click);
+          break;
+      }
     }
-        clickSlot++;
+
+        //clickSlot++;
   });
 
   console.log(util.inspect(clickList1, false, null));
@@ -140,14 +148,14 @@ request(url, function(err, response, body)
       s02 : clickList2,
       s03 : clickList3,
       s04 : clickList4,
-      s05 : 'null',
-      s06 : 'null',
-      s07 : 'null',
-      s08 : 'null',
-      s09 : 'null',
-      s10 : 'null',
-      s11 : 'null',
-      s12 : 'null'
+      s05 : clickList5,
+      s06 : clickList6,
+      s07 : clickList7,
+      s08 : clickList8,
+      s09 : clickList9,
+      s10 : clickList10,
+      s11 : clickList11,
+      s12 : clickList12
     }
   };
 
